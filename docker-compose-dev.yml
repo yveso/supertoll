@@ -1,0 +1,14 @@
+version: '3.6'
+
+services:
+  api:
+    build:
+      context: ./containers/api
+      dockerfile: Dockerfile-dev
+    volumes:
+      - './containers/api:/app'
+    ports:
+      - 5001:5000
+    environment:
+      - FLASK_ENV=development
+      - APP_SETTINGS=project.config.DevelopmentConfig
