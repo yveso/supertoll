@@ -1,5 +1,8 @@
 import os
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
 
 
 def create_app():
@@ -7,8 +10,17 @@ def create_app():
     app_settings = os.getenv("APP_SETTINGS")
     app.config.from_object(app_settings)
 
-    from api.sanity import bp as sanity_bp
+    db.init_app(app)
 
+    from . import models  # noqa
+
+    from api.sanity import bp as sanity_bp
     app.register_blueprint(sanity_bp)
+
+    @app.cli.command()
+    def recreate_db():
+        db.drop_all()
+        db.create_all()
+        db.session.commit()
 
     return app
