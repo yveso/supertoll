@@ -11,4 +11,4 @@ services:
       - 5001:5000
     environment:
       - FLASK_ENV=development
-      - APP_SETTINGS=project.config.DevelopmentConfig
+      - APP_SETTINGS=api.config.DevelopmentConfig
