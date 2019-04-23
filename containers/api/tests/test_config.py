@@ -10,6 +10,7 @@ def test_TestingConfig():
     assert app.config["SQLALCHEMY_DATABASE_URI"] == os.environ.get(
         "DATABASE_TEST_URL"
     )
+    assert app.config["SECRET_KEY"] == "foo_bar"
 
 
 def test_DevelopmentConfig():
@@ -20,6 +21,7 @@ def test_DevelopmentConfig():
     assert app.config["SQLALCHEMY_DATABASE_URI"] == os.environ.get(
         "DATABASE_URL"
     )
+    assert app.config["SECRET_KEY"] == "foo_bar"
 
 
 def test_ProductionConfig():
@@ -30,3 +32,4 @@ def test_ProductionConfig():
     assert app.config["SQLALCHEMY_DATABASE_URI"] == os.environ.get(
         "DATABASE_URL"
     )
+    assert app.config["SECRET_KEY"] == "foo_bar"
