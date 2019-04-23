@@ -15,7 +15,12 @@ def create_app():
     from . import models  # noqa
 
     from api.sanity import bp as sanity_bp
+
     app.register_blueprint(sanity_bp)
+
+    @app.shell_context_processor
+    def ctx():
+        return {"app": app, "db": db}
 
     @app.cli.command()
     def recreate_db():
