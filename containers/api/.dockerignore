@@ -1,5 +1,5 @@
 .vscode
 .pytest_cache
 .dockerignore
-Dockerfile-dev
+Dockerfile
 Dockerfile-prod
