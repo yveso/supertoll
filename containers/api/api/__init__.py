@@ -15,8 +15,10 @@ def create_app():
     from . import models  # noqa
 
     from api.sanity import bp as sanity_bp
+    from api.users import bp as users_bp
 
     app.register_blueprint(sanity_bp)
+    app.register_blueprint(users_bp)
 
     @app.shell_context_processor
     def ctx():
