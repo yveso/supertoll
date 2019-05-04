@@ -1,0 +1,17 @@
+FROM python:3.7.2-alpine
+
+RUN apk update && \
+    apk add --virtual build-deps gcc python-dev musl-dev && \
+    apk add postgresql-dev && \
+    apk add netcat-openbsd
+
+WORKDIR /app
+
+RUN pip install pipenv
+COPY Pipfile Pipfile
+COPY Pipfile.lock Pipfile.lock
+RUN pipenv install --deploy --system --dev
+
+COPY . /app
+
+CMD python app.py

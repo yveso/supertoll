@@ -8,6 +8,7 @@ flask = "*"
 flask-sqlalchemy = "*"
 "psycopg2-binary" = "*"
 flask-restful = "*"
+waitress = "*"
 
 [dev-packages]
 "flake8" = "*"
