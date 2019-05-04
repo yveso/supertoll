@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -13,6 +13,11 @@ def create_app():
     db.init_app(app)
 
     from . import models  # noqa
+
+    @app.route("/")
+    def index():
+        users = models.User.query.all()
+        return render_template("index.html", users=users)
 
     from api.sanity import bp as sanity_bp
     from api.users import bp as users_bp
