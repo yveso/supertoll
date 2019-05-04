@@ -1,14 +1,6 @@
 import json
 
-from api import db
-from api.models import User
-
-
-def add_user(username, email):
-    user = User(username=username, email=email)
-    db.session.add(user)
-    db.session.commit()
-    return user
+from tests.helpers import add_user
 
 
 def test_get(client):
