@@ -30,4 +30,10 @@ def create_app():
         db.create_all()
         db.session.commit()
 
+    @app.cli.command()
+    def seed_db():
+        db.session.add(models.User(username="Test", email="test@test.com"))
+        db.session.add(models.User(username="Foo Bar", email="foo@bar.com"))
+        db.session.commit()
+
     return app
