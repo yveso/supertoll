@@ -11,10 +11,8 @@ def add_user(username, email):
     return user
 
 
-def test_users_get(app):
+def test_get(client):
     """Get all users"""
-    client = app.test_client()
-
     add_user("Test", "test@test.com")
     add_user("Test2", "foo@bar.com")
 
@@ -26,10 +24,8 @@ def test_users_get(app):
     assert len(data["data"]["users"]) == 2
 
 
-def test_users_get_id(app):
+def test_get_id(client):
     """Get a single user"""
-    client = app.test_client()
-
     user = add_user("Test", "test@test.com")
 
     response = client.get(f"/users/{user.id}")
@@ -41,10 +37,8 @@ def test_users_get_id(app):
     assert "test@test.com" in data["data"]["email"]
 
 
-def test_users_get_id_no_valid_id(app):
+def test_get_id_no_valid_id(client):
     """Get a single user, no valid id"""
-    client = app.test_client()
-
     response = client.get("/users/not_a_id")
     data = json.loads(response.data.decode())
 
@@ -53,10 +47,8 @@ def test_users_get_id_no_valid_id(app):
     assert "User does not exist" in data["message"]
 
 
-def test_users_get_id_unknown_id(app):
+def test_get_id_unknown_id(client):
     """Get a single user, unknown id"""
-    client = app.test_client()
-
     response = client.get("/users/999999")
     data = json.loads(response.data.decode())
 
@@ -65,10 +57,8 @@ def test_users_get_id_unknown_id(app):
     assert "User does not exist" in data["message"]
 
 
-def test_users_post(app):
+def test_post(client):
     """Post a new user"""
-    client = app.test_client()
-
     response = client.post(
         "/users",
         data=json.dumps({"username": "John Doe", "email": "john@doe.org"}),
@@ -81,11 +71,9 @@ def test_users_post(app):
     assert "success" in data["status"]
 
 
-def test_users_post_empty_payload(app):
+def test_post_empty_payload(client):
     """Post a new user with empty payload
     Error is thrown"""
-    client = app.test_client()
-
     response = client.post(
         "/users", data=json.dumps({}), content_type="application/json"
     )
@@ -96,11 +84,9 @@ def test_users_post_empty_payload(app):
     assert "fail" in data["status"]
 
 
-def test_users_post_no_username(app):
+def test_post_no_username(client):
     """Post a new user with no username in payload
     Error is thrown"""
-    client = app.test_client()
-
     response = client.post(
         "/users",
         data=json.dumps({"email": "john@doe.org"}),
@@ -113,11 +99,9 @@ def test_users_post_no_username(app):
     assert "fail" in data["status"]
 
 
-def test_users_post_no_email(app):
+def test_post_no_email(client):
     """Post a new user with no email in payload
     Error is thrown"""
-    client = app.test_client()
-
     response = client.post(
         "/users",
         data=json.dumps({"username": "John Doe"}),
@@ -130,11 +114,9 @@ def test_users_post_no_email(app):
     assert "fail" in data["status"]
 
 
-def test_users_post_email_twice(app):
+def test_post_email_twice(client):
     """Post same email twice
     Error is thrown"""
-    client = app.test_client()
-
     client.post(
         "/users",
         data=json.dumps({"username": "John Doe", "email": "john@doe.org"}),

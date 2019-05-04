@@ -3,7 +3,7 @@ from api import create_app, config, db
 
 
 @pytest.fixture(scope="module")
-def app():
+def client():
     app = create_app()
     app.config.from_object(config.TestingConfig)
 
@@ -11,7 +11,7 @@ def app():
     db.create_all()
     db.session.commit()
 
-    yield app
+    yield app.test_client()
 
     db.session.remove()
     db.drop_all()
