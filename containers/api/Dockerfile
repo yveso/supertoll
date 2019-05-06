@@ -7,10 +7,8 @@ RUN apk update && \
 
 WORKDIR /app
 
-RUN pip install pipenv
-COPY Pipfile Pipfile
-COPY Pipfile.lock Pipfile.lock
-RUN pipenv install --deploy --system --dev
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
 
 COPY . /app
 
