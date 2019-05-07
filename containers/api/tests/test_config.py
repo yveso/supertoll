@@ -11,6 +11,8 @@ def test_TestingConfig():
         "DATABASE_TEST_URL"
     )
     assert app.config["SECRET_KEY"] == "foo_bar"
+    assert app.config["DEBUG_TB_ENABLED"] is False
+    assert app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] is False
 
 
 def test_DevelopmentConfig():
@@ -22,6 +24,8 @@ def test_DevelopmentConfig():
         "DATABASE_URL"
     )
     assert app.config["SECRET_KEY"] == "foo_bar"
+    assert app.config["DEBUG_TB_ENABLED"] is True
+    assert app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] is False
 
 
 def test_ProductionConfig():
@@ -33,3 +37,5 @@ def test_ProductionConfig():
         "DATABASE_URL"
     )
     assert app.config["SECRET_KEY"] == "foo_bar"
+    assert app.config["DEBUG_TB_ENABLED"] is False
+    assert app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] is False
