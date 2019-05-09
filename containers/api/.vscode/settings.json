@@ -1,0 +1,21 @@
+{
+  "python.pythonPath": "venv\\Scripts\\python.exe",
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.enabled": true,
+  "python.formatting.provider": "black",
+  "editor.formatOnSave": true,
+  "python.linting.ignorePatterns": ["migrations/*/*.py"],
+  "python.formatting.blackArgs": [
+    "--exclude",
+    "migrations/",
+    "--line-length",
+    "79"
+  ],
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#fceab0",
+    "titleBar.activeForeground": "#3671a2",
+    "titleBar.inactiveBackground": "#fceab0",
+    "titleBar.inactiveForeground": "#3671a2"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "editor.formatOnSave": true,
+  "prettier.trailingComma": "all",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#61dafb",
+    "titleBar.activeForeground": "#282c34",
+    "titleBar.inactiveBackground": "#61dafb",
+    "titleBar.inactiveForeground": "#282c34"
+  }
+}
