@@ -1,3 +1,7 @@
-# Black
+# Todos:
 
-    * pre versions und pipfile.lock vertragen sich nicht?
+## Client Container
+
+- Tests brutal langsam
+- Jest, Enzyme, React Testing Library, was wie wo?
+- Test Code Complete für VS Code?
