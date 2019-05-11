@@ -1,5 +1,6 @@
 import React from "react";
 import UsersList from "./components/UsersList";
+import AddUser from "./components/AddUser";
 
 function App() {
   const [users, setUsers] = React.useState([]);
@@ -17,6 +18,8 @@ function App() {
   return (
     <>
       <h1>All Users</h1>
+      <br />
+      <AddUser refresh={getUsers} />
       <br />
       <UsersList users={users} />
     </>

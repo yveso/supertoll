@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddUser renders a snapshot properly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <div>
+    <input
+      name="username"
+      onChange={[Function]}
+      placeholder="Username"
+      required={true}
+      type="text"
+      value=""
+    />
+  </div>
+  <div>
+    <input
+      name="email"
+      onChange={[Function]}
+      placeholder="Email"
+      required={true}
+      type="text"
+      value=""
+    />
+  </div>
+  <div>
+    <input
+      type="submit"
+      value="Submit"
+    />
+  </div>
+</form>
+`;
