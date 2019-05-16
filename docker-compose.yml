@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   api:
@@ -6,7 +6,7 @@ services:
       context: ./containers/api
       dockerfile: Dockerfile
     volumes:
-      - './containers/api:/app'
+      - "./containers/api:/app"
     ports:
       - 5001:5000
     environment:
@@ -34,5 +34,22 @@ services:
     restart: always
     ports:
       - 80:80
+    depends_on:
+      - api
+      - client
+
+  client:
+    build:
+      context: ./containers/client
+      dockerfile: Dockerfile
+    volumes:
+      - "./containers/client:/usr/src/app"
+      - "/usr/src/app/node_modules"
+    ports:
+      - 3007:3000
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
+      - CHOKIDAR_USEPOLLING=true
     depends_on:
       - api
