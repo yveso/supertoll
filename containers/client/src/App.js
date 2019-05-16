@@ -6,7 +6,7 @@ function App() {
   const [users, setUsers] = React.useState([]);
   React.useEffect(() => {
     getUsers();
-  });
+  }, []);
 
   function getUsers() {
     fetch(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`)
