@@ -2,7 +2,7 @@ import pytest
 from api import create_app, config, db
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture()
 def client():
     app = create_app()
     app.config.from_object(config.TestingConfig)
