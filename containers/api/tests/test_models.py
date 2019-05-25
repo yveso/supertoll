@@ -32,9 +32,9 @@ def test_user_no_duplicate_email(client):
 
 def test_user_password_hashes_are_randon(client):
     user1 = add_user(
-        username="Test 1", email="test1@test.org", password="this_is_eqaul"
+        username="Test 1", email="test1@test.org", password="this_is_equal"
     )
     user2 = add_user(
-        username="Test 2", email="test2@test.org", password="this_is_eqaul"
+        username="Test 2", email="test2@test.org", password="this_is_equal"
     )
     assert user1.password_hash != user2.password_hash
