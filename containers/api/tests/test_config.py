@@ -13,6 +13,7 @@ def test_TestingConfig():
     assert app.config["SECRET_KEY"] == "foo_bar"
     assert app.config["DEBUG_TB_ENABLED"] is False
     assert app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] is False
+    assert app.config["BCRYPT_LOG_ROUNDS"] == 4
 
 
 def test_DevelopmentConfig():
@@ -26,6 +27,7 @@ def test_DevelopmentConfig():
     assert app.config["SECRET_KEY"] == "foo_bar"
     assert app.config["DEBUG_TB_ENABLED"] is True
     assert app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] is False
+    assert app.config["BCRYPT_LOG_ROUNDS"] == 4
 
 
 def test_ProductionConfig():
@@ -39,3 +41,4 @@ def test_ProductionConfig():
     assert app.config["SECRET_KEY"] == "foo_bar"
     assert app.config["DEBUG_TB_ENABLED"] is False
     assert app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] is False
+    assert app.config["BCRYPT_LOG_ROUNDS"] == 13

@@ -53,7 +53,13 @@ def test_post(client):
     """Post a new user"""
     response = client.post(
         "/users",
-        data=json.dumps({"username": "John Doe", "email": "john@doe.org"}),
+        data=json.dumps(
+            {
+                "username": "John Doe",
+                "email": "john@doe.org",
+                "password": "password123",
+            }
+        ),
         content_type="application/json",
     )
     data = json.loads(response.data.decode())
@@ -106,17 +112,44 @@ def test_post_no_email(client):
     assert "fail" in data["status"]
 
 
+def test_post_no_password(client):
+    """Post a new user with no password in payload
+    Error is thrown"""
+    response = client.post(
+        "/users",
+        data=json.dumps({"username": "John Doe", "email": "john@doe.com"}),
+        content_type="application/json",
+    )
+    data = json.loads(response.data.decode())
+
+    assert response.status_code == 400
+    assert "Invalid payload" in data["message"]
+    assert "fail" in data["status"]
+
+
 def test_post_email_twice(client):
     """Post same email twice
     Error is thrown"""
     client.post(
         "/users",
-        data=json.dumps({"username": "John Doe", "email": "john@doe.org"}),
+        data=json.dumps(
+            {
+                "username": "John Doe",
+                "email": "john@doe.org",
+                "password": "password123",
+            }
+        ),
         content_type="application/json",
     )
     response = client.post(
         "/users",
-        data=json.dumps({"username": "John Doe2", "email": "john@doe.org"}),
+        data=json.dumps(
+            {
+                "username": "John Doe2",
+                "email": "john@doe.org",
+                "password": "password123",
+            }
+        ),
         content_type="application/json",
     )
     data = json.loads(response.data.decode())

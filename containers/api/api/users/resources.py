@@ -33,16 +33,20 @@ class Users(Resource):
             not post_data
             or "username" not in post_data
             or "email" not in post_data
+            or "password" not in post_data
         ):
             return {"message": "Invalid payload", "status": "fail"}, 400
 
         username = post_data.get("username")
         email = post_data.get("email")
+        password = post_data.get("password")
 
         try:
             user_with_mail = User.query.filter_by(email=email).first()
             if not user_with_mail:
-                db.session.add(User(username=username, email=email))
+                db.session.add(
+                    User(username=username, email=email, password=password)
+                )
                 db.session.commit()
                 return (
                     {"status": "success", "message": f"{email} was added!"},
