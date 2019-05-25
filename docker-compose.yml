@@ -14,6 +14,7 @@ services:
       - APP_SETTINGS=api.config.DevelopmentConfig
       - DATABASE_URL=postgres://postgres:postgres@api-db:5432/api_dev
       - DATABASE_TEST_URL=postgres://postgres:postgres@api-db:5432/api_test
+      - SECRET_KEY=super_secret_key
     depends_on:
       - api-db
 
