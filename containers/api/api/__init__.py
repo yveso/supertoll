@@ -24,7 +24,7 @@ def create_app():
     migrate.init_app(app, db)
     bcrypt.init_app(app)
 
-    from . import models  # noqa
+    from api import models
 
     @app.route("/")
     def index():
@@ -51,8 +51,16 @@ def create_app():
 
     @app.cli.command()
     def seed_db():
-        db.session.add(models.User(username="Test", email="test@test.com"))
-        db.session.add(models.User(username="Foo Bar", email="foo@bar.com"))
+        db.session.add(
+            models.User(
+                username="Test", email="test@test.com", password="abc123"
+            )
+        )
+        db.session.add(
+            models.User(
+                username="Foo Bar", email="foo@bar.com", password="123abc"
+            )
+        )
         db.session.commit()
 
     return app
