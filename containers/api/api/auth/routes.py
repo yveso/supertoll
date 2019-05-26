@@ -111,3 +111,27 @@ def logout():
             return jsonify({"status": "fail", "message": response}), 401
     else:
         return jsonify({"status": "fail", "message": "Missing header"}), 403
+
+
+@bp.route("/status", methods=["GET"])
+def status():
+    auth_header = request.headers.get("Authorization")
+    if auth_header:
+        auth_token = auth_header.split(" ")[1]
+        response = User.decode_auth_token(auth_token)
+        if not isinstance(response, str):
+            user = User.query.filter_by(id=response).first()
+            return (
+                jsonify(
+                    {
+                        "status": "success",
+                        "message": "Success",
+                        "data": user.to_json(),
+                    }
+                ),
+                200,
+            )
+        else:
+            return jsonify({"status": "fail", "message": response}), 401
+    else:
+        return jsonify({"status": "fail", "message": "Invalid token"}), 401

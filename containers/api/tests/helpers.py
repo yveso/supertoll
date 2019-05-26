@@ -34,9 +34,10 @@ def assert_data(data, expected_status, expected_message):
     assert data["message"] == expected_message
 
 
-def log_user_in_and_get_token(client):
-    email, password = "test@test.org", "abc123"
-    add_user("test", email, password)
+def log_user_in_and_get_token(
+    client, username="test", email="test@test.org", password="abc123"
+):
+    add_user(username, email, password)
     _, login_data = post_json(
         client, "/auth/login", {"email": email, "password": password}
     )
