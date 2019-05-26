@@ -17,5 +17,16 @@
     "titleBar.activeForeground": "#3671a2",
     "titleBar.inactiveBackground": "#fceab0",
     "titleBar.inactiveForeground": "#3671a2"
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/venv": true,
+    "**/.coverage": true
   }
 }
