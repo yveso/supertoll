@@ -92,3 +92,22 @@ def login():
             )
     except Exception:
         return jsonify({"status": "fail", "message": "Try again"}), 500
+
+
+@bp.route("/logout", methods=["GET"])
+def logout():
+    auth_header = request.headers.get("Authorization")
+    if auth_header:
+        auth_token = auth_header.split(" ")[1]
+        response = User.decode_auth_token(auth_token)
+        if not isinstance(response, str):
+            return (
+                jsonify(
+                    {"status": "success", "message": "Successfully logged out"}
+                ),
+                200,
+            )
+        else:
+            return jsonify({"status": "fail", "message": response}), 401
+    else:
+        return jsonify({"status": "fail", "message": "Missing header"}), 403
